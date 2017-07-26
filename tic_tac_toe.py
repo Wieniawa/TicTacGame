@@ -241,37 +241,50 @@ def random_start(board):
     randomm = random.choice([1,0])
     if randomm == 0:
         for i in range(4):
-            os.system('clear')
-            print(board)
-            board.change_value(input(O+"choose number: ")).print_cross()
-            os.system('clear')
-            print(board)
-            board.ai_for_computer().print_circle()
-            os.system('clear')            
-            print(board)
-            if i == 3:
-                board.change_value(input(O+"choose number: ")).print_cross()
-                os.system('clear')            
+            try:
+                os.system('clear')
                 print(board)
-
-    elif randomm == 1:
-        for i in range(4):
-            board.ai_for_computer().print_circle()
-            os.system('clear')            
-            print(board)
-            board.change_value(input(O+"choose number: ")).print_cross()
-            os.system('clear')            
-            print(board)
-            if i == 3:
+                user = input(O+"choose number: ")
+                board.change_value(user).print_cross()
+                os.system('clear')
+                print(board)
                 board.ai_for_computer().print_circle()
                 os.system('clear')            
                 print(board)
-    
-    
+                if i == 3:
+                    user = input(O+"choose number: ")
+                    board.change_value(user).print_cross()
+                    os.system('clear')            
+                    print(board)
+            except AttributeError:
+                user = input(O+"Last chance: : ")
+                board.change_value(user).print_cross()
+                os.system('clear')            
+                print(board)
+    elif randomm == 1:
+        for i in range(4):
+            try:
+                board.ai_for_computer().print_circle()
+                os.system('clear')            
+                print(board)
+                user = input(O+"choose number: ")
+                board.change_value(user).print_cross()
+                os.system('clear')            
+                print(board)
+                if i == 3:
+                    board.ai_for_computer().print_circle()
+                    os.system('clear')            
+                    print(board)
+            except AttributeError:
+                user = input(O+"Last chance: ")
+                board.change_value(user).print_cross()
+                os.system('clear')            
+                print(board)
 def main():
     board = Board()
     board.add_board_from_file()
     random_start(board)
+
 
 if __name__ == "__main__":
     main()
